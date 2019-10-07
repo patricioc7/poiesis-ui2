@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import { SignUpLink } from '../SignUp';
-import { withFirebase } from '../Firebase';
+import { withAuth } from '../Auth';
 import { PasswordForgetLink } from '../PasswordForget';
 import * as ROUTES from '../../constants/routes';
+
 const SignInPage = () => (
     <div>
         <h1>SignIn</h1>
@@ -25,8 +26,8 @@ class SignInFormBase extends Component {
     }
     onSubmit = event => {
         const { email, password } = this.state;
-        this.props.firebase
-            .doSignInWithEmailAndPassword(email, password)
+        this.props.auth.doSignInWithEmailAndPassword
+            (email, password)
             .then(() => {
                 this.setState({ ...INITIAL_STATE });
                 this.props.history.push(ROUTES.HOME);
@@ -68,7 +69,7 @@ class SignInFormBase extends Component {
 }
 const SignInForm = compose(
     withRouter,
-    withFirebase,
+    withAuth,
 )(SignInFormBase);
 export default SignInPage;
 export { SignInForm };

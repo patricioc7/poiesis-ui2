@@ -2,13 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
-import Firebase, { FirebaseContext } from './components/Firebase';
 import * as serviceWorker from './serviceWorker';
+import Auth, {AuthContext} from "./components/Auth";
 
 ReactDOM.render(
-    <FirebaseContext.Provider value={new Firebase()}>
+    <AuthContext.Provider value={new Auth()}>
         <App />
-    </FirebaseContext.Provider>
+    </AuthContext.Provider>
     ,document.getElementById('root'));
 
 // If you want your src to work offline and load faster, you can change

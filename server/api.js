@@ -6,6 +6,7 @@ api.get('/holis/', (req, res) => {
 });
 
 api.post('/users/authenticate/', (req, res) => {
+    console.log("ENTRO EN LA API")
   request.post(
     'http://localhost:8080/user/login',
     {
@@ -21,10 +22,13 @@ api.post('/users/authenticate/', (req, res) => {
     (error, res2, body) => {
       if (error) {
         console.error(error);
-        return;
+        res.status(500);
       }
-      console.log(body);
+      console.log('este es el bodi', body);
+
       res.status(200).json({ jwt: body.token, userName: body.name });
+
+
     },
   );
 });

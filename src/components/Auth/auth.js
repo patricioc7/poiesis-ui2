@@ -33,6 +33,7 @@ class Auth {
         localStorage.removeItem = function(key) {
 
             event.key = key;
+            event.value = null;
             document.dispatchEvent(event);
             originalRemoveItem.apply(this, arguments);
         };
@@ -45,8 +46,18 @@ class Auth {
         return this.user
     }
 
-    doSignInWithEmailAndPassword = (email, password) =>
-       this.user = userService.login(email, password);
+    doSignInWithEmailAndPassword = (email, password) => {
+       return userService.login(email, password).then((user) => {
+            this.user.isLoggedIn = true;
+            this.user.name = user.userName;
+            this.user.token = user.jwt;
+            localStorage.setItem('user', JSON.stringify(this.user));
+           return this.user;
+        })
+
+
+
+    }
 
     isLoggedIn = () => {
         return this.user.isLoggedIn;

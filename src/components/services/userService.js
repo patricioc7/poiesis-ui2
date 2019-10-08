@@ -25,9 +25,6 @@ function login(username, pass) {
     .then(user => {
       // store user details and jwt token in local storage to keep user logged in between page refreshes
       console.log('llego user', user)
-      console.log('Guardando user en LS');
-      localStorage.setItem('user', JSON.stringify(user));
-
       return user;
     }).catch(error => {
             throw error

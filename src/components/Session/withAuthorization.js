@@ -12,7 +12,7 @@ const withAuthorization = condition => Component => {
            const onStorageEvent = (storageEvent) => {
                console.log('entró al authorized')
                if(storageEvent.key == "user"){
-                   if(storageEvent.value === undefined){
+                   if(!storageEvent.value){
                        this.props.history.push(ROUTES.SIGN_IN);
                    }
                }
@@ -27,8 +27,8 @@ const withAuthorization = condition => Component => {
         render() {
             return(
                 <AuthUserContext.Consumer>
-                    {authUser =>
-                        condition(authUser) ? <Component {...this.props} /> : null
+                    {sorete =>
+                        condition(sorete) ? <Component {...this.props} /> : null
                     }
                 </AuthUserContext.Consumer>
             )

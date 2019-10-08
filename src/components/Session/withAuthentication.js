@@ -11,18 +11,21 @@ const withAuthentication = Component => {
                 authUser:  JSON.parse(localStorage.getItem('user'))
             };
         }
-        componentDidMount() {
+        componentDidMount = () => {
             console.log('se montó');
 
             const onStorageEvent = (storageEvent) => {
                 if(storageEvent.key == "user"){
-                    if(storageEvent.value === undefined){
+                    console.log("+++++++++++")
+                    console.log(storageEvent.key);
+                    console.log(storageEvent.value);
+                    console.log("+++++++++++")
+                    if(!storageEvent.value){
+                        console.log('cambio el estado a logged OUT en withauthentication');
                         this.setState({authUser : null})
-                        this.props.auth.user.isLoggedIn = false;
                     }else{
                         console.log('cambio el estado a logged en withauthentication');
-                        this.setState({authUser : JSON.parse(localStorage.getItem('user'))})
-                        this.props.auth.user.isLoggedIn = true;
+                        this.setState({authUser : "logged"})
                     }
                 }
             }

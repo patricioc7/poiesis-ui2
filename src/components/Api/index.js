@@ -6,6 +6,7 @@ index.get('/holis/', (req, res) => {
 });
 
 index.post('/users/authenticate/', (req, res) => {
+    console.log("entro al post");
     request.post(
         'http://localhost:8080/user/login',
         {
@@ -19,10 +20,12 @@ index.post('/users/authenticate/', (req, res) => {
             },
         },
         (error, res2, body) => {
+
             if (error) {
                 console.error(error);
                 return;
             }
+            console.log(res2);
             console.log(body);
             res.status(200).json({ jwt: body.token, userName: body.name });
         },

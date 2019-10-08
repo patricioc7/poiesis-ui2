@@ -10,6 +10,7 @@ const withAuthorization = condition => Component => {
        componentDidMount() {
 
            const onStorageEvent = (storageEvent) => {
+               console.log('entró al authorized')
                if(storageEvent.key == "user"){
                    if(storageEvent.value === undefined){
                        this.props.history.push(ROUTES.SIGN_IN);

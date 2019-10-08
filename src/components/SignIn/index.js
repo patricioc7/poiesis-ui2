@@ -30,6 +30,7 @@ class SignInFormBase extends Component {
             (email, password)
             .then(() => {
                 this.setState({ ...INITIAL_STATE });
+                console.log('Redireccionando a la home');
                 this.props.history.push(ROUTES.HOME);
             })
             .catch(error => {

@@ -25,7 +25,7 @@ const withAuthentication = Component => {
                         this.setState({authUser : null})
                     }else{
                         console.log('cambio el estado a logged en withauthentication');
-                        this.setState({authUser : "logged"})
+                        this.setState({authUser : this.props.auth.user})
                     }
                 }
             }

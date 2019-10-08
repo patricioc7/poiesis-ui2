@@ -38,6 +38,19 @@ function logout() {
   localStorage.removeItem('user');
 }
 
+function register(username, email, password) {
+  console.log('entró al servicio de register');
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name: username, email: email, password: password }),
+  };
+
+  return fetch(`${apiUrl}/users/register`, requestOptions).then(
+      handleResponse,
+  );
+}
+
 function getAll() {
   const requestOptions = {
     method: 'GET',
@@ -58,17 +71,7 @@ function getById(id) {
   );
 }
 
-function register(user) {
-  const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(user),
-  };
 
-  return fetch(`${apiUrl}/users/register`, requestOptions).then(
-    handleResponse,
-  );
-}
 
 function update(user) {
   const requestOptions = {

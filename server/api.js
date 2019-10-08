@@ -33,4 +33,34 @@ api.post('/users/authenticate/', (req, res) => {
   );
 });
 
+
+api.post('/users/register/', (req, res) => {
+    console.log("entro al post de register");
+    request.post(
+        'http://localhost:8080/user/register',
+        {
+            json: {
+                name: req.body.name,
+                email: req.body.email,
+                password: req.body.password,
+            },
+            headers: {
+                'Content-Type': 'application/json',
+                'x-clientSecret': 'wolololoaka',
+            },
+        },
+        (error, res2, body) => {
+
+            if (error) {
+                console.error(error);
+                return;
+            }
+            console.log(res2);
+            console.log(body);
+            res.status(200).json({ body });
+        },
+    );
+});
+
+
 module.exports = api;

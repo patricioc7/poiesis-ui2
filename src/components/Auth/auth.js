@@ -54,10 +54,12 @@ class Auth {
             localStorage.setItem('user', JSON.stringify(this.user));
            return this.user;
         })
-
-
-
     }
+
+    doCreateUserWithEmailAndPassword = (username, email, password) =>{
+        return userService.register(username, email, password);
+    }
+
 
     isLoggedIn = () => {
         return this.user.isLoggedIn;

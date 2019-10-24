@@ -1,44 +1,187 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
-import SignOutButton from '../SignOut';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
 import * as ROUTES from '../../constants/routes';
 import { AuthUserContext } from '../Session';
+import Button from "../../MaterialKitComponets/CustomButtons/Button";
+import Email from "@material-ui/core/SvgIcon/SvgIcon";
+import CustomDropdown from "../../MaterialKitComponets/CustomDropdown/CustomDropdown";
+import Header from "../../MaterialKitComponets/Header/Header";
 
-const Navigation = () => (
+
+import styles from "../../assets/jss/material-kit-react/views/componentsSections/navbarsStyle.js";
+import SignOutButton from "../SignOut";
+const useStyles = makeStyles(styles);
+
+
+const Navigation = (props) => (
+
     <AuthUserContext.Consumer>
         {authUser =>
-            authUser ? <NavigationAuth /> : <NavigationNonAuth />
+            authUser ? <NavigationAuth  {...props}/> : <NavigationNonAuth />
         }
     </AuthUserContext.Consumer>
 );
 
-const NavigationAuth = () => (
-    <ul>
-        <li>
-            <Link to={ROUTES.LANDING}>Landing</Link>
-        </li>
-        <li>
-            <Link to={ROUTES.HOME}>Home</Link>
-        </li>
-        <li>
-            <Link to={ROUTES.ACCOUNT}>Account</Link>
-        </li>
-        <li>
-            <SignOutButton />
-        </li>
-    </ul>
-);
+const NavigationAuth = (props) => {
+    const classes = useStyles();
 
-const NavigationNonAuth = () => (
-    <ul>
-        <li>
-            <Link to={ROUTES.LANDING}>Landing</Link>
-        </li>
-        <li>
-            <Link to={ROUTES.SIGN_IN}>Sign In</Link>
-        </li>
-    </ul>
-);
+    return(
+                <Header
+                    color="primary"
+                    fixed
+                    brand = "Poiesis Arte Joven"
+                    changeColorOnScroll={{
+                        height: 400,
+                        color: "white"
+                    }}
+                    leftLinks={
+                        <List className={classes.list}>
+                            <ListItem className={classes.listItem}>
+                                <Button
+                                    href="#pablo"
+                                    className={classes.navLink}
+                                    onClick={e => e.preventDefault()}
+                                    color="transparent"
+                                >
+                                    Palabra
+                                </Button>
+                            </ListItem>
+                            <ListItem className={classes.listItem}>
+                                <Button
+                                    href="#pablo"
+                                    className={classes.navLink}
+                                    onClick={e => e.preventDefault()}
+                                    color="transparent"
+                                >
+                                    Música
+                                </Button>
+                            </ListItem>
+                            <ListItem className={classes.listItem}>
+                                <Button
+                                    href="#pablo"
+                                    className={classes.navLink}
+                                    onClick={e => e.preventDefault()}
+                                    color="transparent"
+                                >
+                                    Imágen
+                                </Button>
+                            </ListItem>
+                        </List>
+                    }
+                    rightLinks={
+                        <List className={classes.list}>
+                            <ListItem className={classes.listItem}>
+                                <Button
+                                    justIcon
+                                    round
+                                    href={ROUTES.SIGN_IN}
+                                    className={classes.notificationNavLink}
+                                    color="blue"
+                                >
+                                    <Email className={classes.icons} />
+                                </Button>
+                            </ListItem>
+                            <ListItem className={classes.listItem}>
+                                <CustomDropdown
+                                    left
+                                    caret={false}
+                                    hoverColor="black"
+                                    dropdownHeader="Dropdown Header"
+                                    buttonText={
+                                        props.user
+                                    }
+                                    buttonProps={{
+                                        className:
+                                            classes.navLink + " " + classes.imageDropdownButton,
+                                        color: "transparent"
+                                    }}
+                                    dropdownList={[
+                                        "Me",
+                                        "Settings and other stuff",
+                                        <SignOutButton />
+                                    ]}
+                                />
+                            </ListItem>
+                        </List>
+                    }
+                />
+    )
+}
+
+const NavigationNonAuth = () => {
+    const classes = useStyles();
+    return(
+        <Header
+            color="primary"
+            fixed
+            brand = "Poiesis Arte Joven"
+            changeColorOnScroll={{
+                height: 400,
+                color: "white"
+            }}
+            leftLinks={
+                <List className={classes.list}>
+                    <ListItem className={classes.listItem}>
+                        <Button
+                            href="#pablo"
+                            className={classes.navLink}
+                            onClick={e => e.preventDefault()}
+                            color="transparent"
+                        >
+                            Palabra
+                        </Button>
+                    </ListItem>
+                    <ListItem className={classes.listItem}>
+                        <Button
+                            href="#pablo"
+                            className={classes.navLink}
+                            onClick={e => e.preventDefault()}
+                            color="transparent"
+                        >
+                            Música
+                        </Button>
+                    </ListItem>
+                    <ListItem className={classes.listItem}>
+                        <Button
+                            href="#pablo"
+                            className={classes.navLink}
+                            onClick={e => e.preventDefault()}
+                            color="transparent"
+                        >
+                            Imágen
+                        </Button>
+                    </ListItem>
+                </List>
+            }
+            rightLinks={
+                <List className={classes.list}>
+                    <ListItem className={classes.listItem}>
+                        <Button
+                            href={ROUTES.SIGN_IN}
+                            className={classes.navLink}
+                            color="transparent"
+                        >
+                            Logueate
+                        </Button>
+                    </ListItem>
+                    <ListItem className={classes.listItem}>
+                        <Button
+                            href={ROUTES.SIGN_IN}
+                            className={classes.navLink}
+                            color="transparent"
+                        >
+                            Registrate
+                        </Button>
+                    </ListItem>
+                </List>
+            }
+        />
+    )
+
+}
+
+
 
 export default Navigation;

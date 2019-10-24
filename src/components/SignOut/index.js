@@ -1,8 +1,9 @@
 import React from 'react';
 import { withAuth } from '../Auth';
+import Button from '@material-ui/core/Button';
 const SignOutButton = ({ auth }) => (
-    <button type="button" onClick={auth.doSignOut}>
-        Sign Out
-    </button>
+    <Button type="button" onClick={auth.doSignOut}>
+        Salir
+    </Button>
 );
 export default withAuth(SignOutButton);

@@ -8,6 +8,7 @@ import LandingPage from '../Landing';
 import SignUpPage from '../SignUp';
 import SignInPage from '../SignIn';
 import PasswordForgetPage from '../PasswordForget';
+import Footer from "../../MaterialKitComponets/Footer/Footer.js";
 import HomePage from '../Home';
 import AccountPage from '../Account';
 import AdminPage from '../Admin';
@@ -37,7 +38,9 @@ const App = (props) => {
                     <Route path={ROUTES.ACCOUNT} component={AccountPage} />
                     <Route path={ROUTES.ADMIN} component={AdminPage} />
                     </div>
+                <Footer/>
                 </div>
+
         </Router>
     );
 }

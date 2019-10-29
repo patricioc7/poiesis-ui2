@@ -5,7 +5,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
-import { SignUpLink } from '../SignUp';
 import { withAuth } from '../Auth';
 import { PasswordForgetLink } from '../PasswordForget';
 import * as ROUTES from '../../constants/routes';
@@ -16,13 +15,15 @@ import {Email} from "@material-ui/icons";
 import GridContainer from "../../MaterialKitComponets/Grid/GridContainer";
 import GridItem from "../../MaterialKitComponets/Grid/GridItem";
 import Card from "../../MaterialKitComponets/Card/Card.js";
+import styles from "../../assets/jss/material-kit-react/views/loginPage.js";
+import CardFooter from "../../MaterialKitComponets/Card/CardFooter";
+import Icon from "@material-ui/core/Icon";
 
 const SignInPage = () => (
     <div>
         <h1>SignIn</h1>
         <SignInForm />
-        <PasswordForgetLink />
-        <SignUpLink />
+
     </div>
 );
 const INITIAL_STATE = {
@@ -33,9 +34,7 @@ const INITIAL_STATE = {
 
 };
 
-import styles from "../../assets/jss/material-kit-react/views/loginPage.js";
-import CardFooter from "../../MaterialKitComponets/Card/CardFooter";
-import Icon from "@material-ui/core/Icon";
+
 
 
 const useStyles = makeStyles(styles);
@@ -81,6 +80,7 @@ const SignInFromBaseFunctional = (props) => {
         <div className={classes.container}>
             <GridContainer justify="center">
                 <GridItem xs={12} sm={12} md={4}>
+
                     <Card className={classes[form.cardAnimation]}>
                         <form className={classes.form} onSubmit={onSubmit}>
                             <CardBody>
@@ -132,6 +132,7 @@ const SignInFromBaseFunctional = (props) => {
                             </CardFooter>
                         </form>
                     </Card>
+                    <PasswordForgetLink />
                 </GridItem>
             </GridContainer>
         </div>

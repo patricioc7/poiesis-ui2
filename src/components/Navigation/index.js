@@ -9,7 +9,6 @@ import Email from "@material-ui/core/SvgIcon/SvgIcon";
 import CustomDropdown from "../../MaterialKitComponets/CustomDropdown/CustomDropdown";
 import Header from "../../MaterialKitComponets/Header/Header";
 
-
 import styles from "../../assets/jss/material-kit-react/views/componentsSections/navbarsStyle.js";
 import SignOutButton from "../SignOut";
 const useStyles = makeStyles(styles);
@@ -168,7 +167,7 @@ const NavigationNonAuth = () => {
                     </ListItem>
                     <ListItem className={classes.listItem}>
                         <Button
-                            href={ROUTES.SIGN_IN}
+                            href={ROUTES.SIGN_UP}
                             className={classes.navLink}
                             color="transparent"
                         >

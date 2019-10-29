@@ -27,85 +27,85 @@ const NavigationAuth = (props) => {
     const classes = useStyles();
 
     return(
-                <Header
-                    color="primary"
-                    fixed
-                    brand = "Poiesis Arte Joven"
-                    changeColorOnScroll={{
-                        height: 400,
-                        color: "white"
-                    }}
-                    leftLinks={
-                        <List className={classes.list}>
-                            <ListItem className={classes.listItem}>
-                                <Button
-                                    href="#pablo"
-                                    className={classes.navLink}
-                                    onClick={e => e.preventDefault()}
-                                    color="transparent"
-                                >
-                                    Palabra
-                                </Button>
-                            </ListItem>
-                            <ListItem className={classes.listItem}>
-                                <Button
-                                    href="#pablo"
-                                    className={classes.navLink}
-                                    onClick={e => e.preventDefault()}
-                                    color="transparent"
-                                >
-                                    Música
-                                </Button>
-                            </ListItem>
-                            <ListItem className={classes.listItem}>
-                                <Button
-                                    href="#pablo"
-                                    className={classes.navLink}
-                                    onClick={e => e.preventDefault()}
-                                    color="transparent"
-                                >
-                                    Imágen
-                                </Button>
-                            </ListItem>
-                        </List>
-                    }
-                    rightLinks={
-                        <List className={classes.list}>
-                            <ListItem className={classes.listItem}>
-                                <Button
-                                    justIcon
-                                    round
-                                    href={ROUTES.SIGN_IN}
-                                    className={classes.notificationNavLink}
-                                    color="blue"
-                                >
-                                    <Email className={classes.icons} />
-                                </Button>
-                            </ListItem>
-                            <ListItem className={classes.listItem}>
-                                <CustomDropdown
-                                    left
-                                    caret={false}
-                                    hoverColor="black"
-                                    dropdownHeader="Dropdown Header"
-                                    buttonText={
-                                        props.user
-                                    }
-                                    buttonProps={{
-                                        className:
-                                            classes.navLink + " " + classes.imageDropdownButton,
-                                        color: "transparent"
-                                    }}
-                                    dropdownList={[
-                                        "Me",
-                                        "Settings and other stuff",
-                                        <SignOutButton />
-                                    ]}
-                                />
-                            </ListItem>
-                        </List>
-                    }
-                />
+        <Header
+            color="primary"
+            fixed
+            brand = "Poiesis Arte Joven"
+            changeColorOnScroll={{
+                height: 400,
+                color: "white"
+            }}
+            leftLinks={
+                <List className={classes.list}>
+                    <ListItem className={classes.listItem}>
+                        <Button
+                            href="#pablo"
+                            className={classes.navLink}
+                            onClick={e => e.preventDefault()}
+                            color="transparent"
+                        >
+                            Palabra
+                        </Button>
+                    </ListItem>
+                    <ListItem className={classes.listItem}>
+                        <Button
+                            href="#pablo"
+                            className={classes.navLink}
+                            onClick={e => e.preventDefault()}
+                            color="transparent"
+                        >
+                            Música
+                        </Button>
+                    </ListItem>
+                    <ListItem className={classes.listItem}>
+                        <Button
+                            href="#pablo"
+                            className={classes.navLink}
+                            onClick={e => e.preventDefault()}
+                            color="transparent"
+                        >
+                            Imágen
+                        </Button>
+                    </ListItem>
+                </List>
+            }
+            rightLinks={
+                <List className={classes.list}>
+                    <ListItem className={classes.listItem}>
+                        <Button
+                            justIcon
+                            round
+                            href={ROUTES.SIGN_IN}
+                            className={classes.notificationNavLink}
+                            color="blue"
+                        >
+                            <Email className={classes.icons} />
+                        </Button>
+                    </ListItem>
+                    <ListItem className={classes.listItem}>
+                        <CustomDropdown
+                            left
+                            caret={false}
+                            hoverColor="black"
+                            dropdownHeader="Dropdown Header"
+                            buttonText={
+                                props.user
+                            }
+                            buttonProps={{
+                                className:
+                                    classes.navLink + " " + classes.imageDropdownButton,
+                                color: "transparent"
+                            }}
+                            dropdownList={[
+                                "Me",
+                                "Settings and other stuff",
+                                <SignOutButton />
+                            ]}
+                        />
+                    </ListItem>
+                </List>
+            }
+        />
     )
 }
 

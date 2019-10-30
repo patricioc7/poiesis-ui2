@@ -47,6 +47,24 @@ const container = {
   }
 };
 
+const maincontainer = {
+  ...conatinerFluid,
+  marginTop: "40px",
+  "@media (min-width: 576px)": {
+    maxWidth: "540px"
+  },
+  "@media (min-width: 768px)": {
+    maxWidth: "720px"
+  },
+  "@media (min-width: 992px)": {
+    maxWidth: "960px"
+  },
+  "@media (min-width: 1200px)": {
+    maxWidth: "1140px"
+  }
+
+};
+
 const boxShadow = {
   boxShadow:
     "0 10px 30px -12px rgba(0, 0, 0, 0.42), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)"
@@ -160,7 +178,7 @@ const title = {
   margin: "1.75rem 0 0.875rem",
   textDecoration: "none",
   fontWeight: "700",
-  fontFamily: `"Roboto Slab", "Times New Roman", serif`
+  fontFamily: `"Roboto","Helvetica","Arial",sans-serif`
 };
 
 const cardTitle = {
@@ -206,6 +224,7 @@ export {
   dangerCardHeader,
   infoCardHeader,
   primaryCardHeader,
+  maincontainer,
   roseCardHeader,
   cardActions,
   cardHeader,

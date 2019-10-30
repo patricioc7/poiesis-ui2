@@ -123,7 +123,7 @@ const NavigationNonAuth = () => {
     const classes = useStyles();
     return(
         <Header
-            color="primary"
+            color="white"
             fixed
             brand = "Poiesis Arte Joven"
             changeColorOnScroll={{

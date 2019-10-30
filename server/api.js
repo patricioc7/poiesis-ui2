@@ -98,8 +98,9 @@ api.post('/post/new/', (req, res) => {
 });
 
 //Get individual post by ID
-api.get('/post/', (req, res) => {
+api.post('/post/', (req, res) => {
     console.log("////////GETTING POST " + req.body.postId + " FROM  API");
+    console.log(req.body);
     request.get(
         'http://localhost:8080/post/' + req.body.postId,
         {

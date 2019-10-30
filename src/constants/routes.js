@@ -4,4 +4,6 @@ export const SIGN_IN = '/signin';
 export const HOME = '/home';
 export const ACCOUNT = '/account';
 export const ADMIN = '/admin';
+export const NEWPOST = '/newpost';
+export const POSTVIEW = '/postview/:postid';
 export const PASSWORD_FORGET = '/pw-forget';

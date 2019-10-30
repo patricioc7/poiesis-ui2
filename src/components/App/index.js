@@ -14,6 +14,8 @@ import AccountPage from '../Account';
 import AdminPage from '../Admin';
 import * as ROUTES from '../../constants/routes';
 import { withAuthentication } from '../Session';
+import PostView from "../PostView";
+import '../../assets/css/main.css';
 
 
 const App = (props) => {
@@ -28,7 +30,7 @@ const App = (props) => {
         <Router>
             <div>
                 <Navigation user={props.auth.user.name}/>
-                <div>
+                <div className={'maindiv'}>
                     <hr />
                     <Route exact path={ROUTES.LANDING} component={LandingPage} />
                     <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
@@ -37,6 +39,11 @@ const App = (props) => {
                     <Route path={ROUTES.HOME} component={HomePage} />
                     <Route path={ROUTES.ACCOUNT} component={AccountPage} />
                     <Route path={ROUTES.ADMIN} component={AdminPage} />
+
+
+
+                    <Route path={ROUTES.POSTVIEW}component={PostView} />
+
                     </div>
                 <Footer/>
                 </div>

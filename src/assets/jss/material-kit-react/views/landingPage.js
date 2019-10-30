@@ -1,4 +1,4 @@
-import { container, title } from "assets/jss/material-kit-react.js";
+import { container, title, maincontainer } from "../../material-kit-react.js";
 
 const landingPageStyle = {
   container: {
@@ -6,6 +6,7 @@ const landingPageStyle = {
     color: "#FFFFFF",
     ...container
   },
+  maincontainer,
   title: {
     ...title,
     display: "inline-block",
@@ -30,6 +31,9 @@ const landingPageStyle = {
     borderRadius: "6px",
     boxShadow:
       "0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)"
+  },
+  jumbotron: {
+    marginTop: "30vh",
   }
 };
 

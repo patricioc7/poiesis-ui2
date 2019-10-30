@@ -73,6 +73,16 @@ const NavigationAuth = (props) => {
                 <List className={classes.list}>
                     <ListItem className={classes.listItem}>
                         <Button
+                            href="#pablo"
+                            className={classes.navLink}
+                            onClick={e => e.preventDefault()}
+                            color="transparent"
+                        >
+                            Nuevo Post
+                        </Button>
+                    </ListItem>
+                    <ListItem className={classes.listItem}>
+                        <Button
                             justIcon
                             round
                             href={ROUTES.SIGN_IN}

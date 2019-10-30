@@ -66,6 +66,37 @@ api.post('/users/register/', (req, res) => {
 
 
 /////POST METHODS
+//New Post
+api.post('/post/new/', (req, res) => {
+    console.log("////////WRITTING NEW POST TO API");
+    request.post(
+        'http://localhost:8080/post/new',
+        {
+            json: {
+                name: req.body.name,
+                userId: req.body.userId,
+                content: req.body.content,
+                password: req.body.password,
+            },
+            headers: {
+                'authorization': req.body.token,
+                'Content-Type': 'application/json',
+                'x-clientSecret': 'wolololoaka',
+            },
+        },
+        (error, res2, body) => {
+
+            if (error) {
+                console.error(error);
+                return;
+            }
+            console.log(res2);
+            console.log(body);
+            res.status(200).json({ body });
+        },
+    );
+});
+
 //Get individual post by ID
 api.get('/post/', (req, res) => {
     console.log("////////GETTING POST " + req.body.postId + " FROM  API");

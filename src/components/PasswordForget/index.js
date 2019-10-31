@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
+import GridItem from "../../MaterialKitComponets/Grid/GridItem";
 const PasswordForgetPage = () => (
     <div>
         <h1>PasswordForget</h1>
@@ -53,9 +54,11 @@ class PasswordForgetFormBase extends Component {
     }
 }
 const PasswordForgetLink = () => (
+    <GridItem xs={12} sm={12} md={12} lg={12}>
     <p>
         <Link to={ROUTES.PASSWORD_FORGET}>Olvidaste tu contraseña?</Link>
     </p>
+    </GridItem>
 );
 export default PasswordForgetPage;
 const PasswordForgetForm = withFirebase(PasswordForgetFormBase);

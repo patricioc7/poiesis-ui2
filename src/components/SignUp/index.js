@@ -25,7 +25,7 @@ const SignUpPage = () => (
 );
 
 const INITIAL_STATE = {
-    username: '',
+    name: '',
     email: '',
     passwordOne: '',
     passwordTwo: '',
@@ -51,8 +51,14 @@ const SignUpFormBaseFunctional = () => {
         this.props.auth
             .doCreateUserWithEmailAndPassword(username, email, passwordOne)
             .then(authUser => {
-                this.setState({ ...INITIAL_STATE });
-                this.props.history.push(ROUTES.SIGN_IN);
+                if(authUser != null){
+                    this.setState({ ...INITIAL_STATE });
+                    this.props.history.push(ROUTES.SIGN_IN);
+                }else{
+                    console.log('entro en el else')
+                    this.setState({ ...INITIAL_STATE, error: 'Error intentando Loguearse, intente nuevamente' });
+                }
+
             })
             .catch(error => {
                 this.setState({ error });
@@ -75,6 +81,25 @@ const SignUpFormBaseFunctional = () => {
                         <form className={classes.form} onSubmit={onSubmit}>
                             <CardBody>
                                 <CustomInput
+                                    labelText="Nombre de usuario..."
+                                    id="username"
+                                    formControlProps={{
+                                        fullWidth: true
+                                    }}
+                                    inputProps={{
+                                        onChange: onChange,
+
+                                        type: "name",
+                                        name: "name",
+                                        value: form.name,
+                                        endAdornment: (
+                                            <InputAdornment position="end">
+                                                <Email className={classes.inputIconsColor} />
+                                            </InputAdornment>
+                                        )
+                                    }}
+                                />
+                                <CustomInput
                                     labelText="Email..."
                                     id="email"
                                     formControlProps={{
@@ -86,25 +111,6 @@ const SignUpFormBaseFunctional = () => {
                                         type: "email",
                                         name: "email",
                                         value: form.email,
-                                        endAdornment: (
-                                            <InputAdornment position="end">
-                                                <Email className={classes.inputIconsColor} />
-                                            </InputAdornment>
-                                        )
-                                    }}
-                                />
-                                <CustomInput
-                                    labelText="Nombre de usuario..."
-                                    id="username"
-                                    formControlProps={{
-                                        fullWidth: true
-                                    }}
-                                    inputProps={{
-                                        onChange: onChange,
-
-                                        type: "username",
-                                        name: "username",
-                                        value: form.username,
                                         endAdornment: (
                                             <InputAdornment position="end">
                                                 <Email className={classes.inputIconsColor} />

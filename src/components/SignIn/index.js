@@ -18,13 +18,10 @@ import Card from "../../MaterialKitComponets/Card/Card.js";
 import styles from "../../assets/jss/material-kit-react/views/loginPage.js";
 import CardFooter from "../../MaterialKitComponets/Card/CardFooter";
 import Icon from "@material-ui/core/Icon";
+import SnackbarContent from "../../MaterialKitComponets/Snackbar/SnackbarContent";
 
 const SignInPage = () => (
-    <div>
-        <h1>SignIn</h1>
         <SignInForm />
-
-    </div>
 );
 const INITIAL_STATE = {
     email: '',
@@ -33,9 +30,6 @@ const INITIAL_STATE = {
     cardAnimation: "cardHidden",
 
 };
-
-
-
 
 const useStyles = makeStyles(styles);
 
@@ -54,10 +48,16 @@ const SignInFromBaseFunctional = (props) => {
         const { email, password } = form;
         props.auth.doSignInWithEmailAndPassword
         (email, password)
-            .then(() => {
-                setValues({ ...INITIAL_STATE });
-                console.log('Redireccionando a la home');
-                props.history.push(ROUTES.HOME);
+            .then((user) => {
+                if(user != null){
+                    setValues({ ...INITIAL_STATE });
+                    console.log('Redireccionando a la home');
+                    props.history.push(ROUTES.HOME);
+                }else{
+                    const error = {message : 'Error intentando loguearse, intente nuevamente'}
+                    setValues({ ...INITIAL_STATE, cardAnimation: "", error: error });
+                }
+
             })
             .catch(error => {
                 setValues({ error });
@@ -79,8 +79,21 @@ const SignInFromBaseFunctional = (props) => {
     return(
         <div className={classes.container}>
             <GridContainer justify="center">
+                {form.error &&
+                <GridItem xs={12} sm={12} md={12}>
+                    <SnackbarContent
+                        message={
+                          <span>
+                            <b>{form.error.message}</b>
+                          </span>
+                        }
+                        close
+                        color="danger"
+                        icon="info_outline"
+                    />
+                </GridItem>
+                }
                 <GridItem xs={12} sm={12} md={4}>
-
                     <Card className={classes[form.cardAnimation]}>
                         <form className={classes.form} onSubmit={onSubmit}>
                             <CardBody>
@@ -125,14 +138,19 @@ const SignInFromBaseFunctional = (props) => {
                                 />
                             </CardBody>
                             <CardFooter className={classes.cardFooter}>
-                                <Button color="primary" size="large" disabled={isInvalid}
-                                        type="submit">
-                                    Continuar
-                                </Button>
+                                <GridContainer >
+                                    <GridItem xs={12} sm={12} md={12} lg={12}>
+                                        <Button color="primary" size="large" disabled={isInvalid}
+                                                type="submit">
+                                            Continuar
+                                        </Button>
+                                    </GridItem>
+                                    <PasswordForgetLink />
+                                </GridContainer>
                             </CardFooter>
                         </form>
                     </Card>
-                    <PasswordForgetLink />
+
                 </GridItem>
             </GridContainer>
         </div>

@@ -26,7 +26,8 @@ const INITIAL_STATE = {
     email: '',
     passwordOne: '',
     passwordTwo: '',
-    error: null,
+    error: '',
+    cardAnimation: "cardHidden",
 };
 
 
@@ -48,17 +49,18 @@ const SignUpFormBaseFunctional = (props) => {
         props.auth
             .doCreateUserWithEmailAndPassword(username, email, passwordOne)
             .then(result => {
+                setValues({ ...INITIAL_STATE });
+                console.log('result on page',result);
                 if(result){
-                    setValues({ ...INITIAL_STATE });
-                    this.props.history.push(ROUTES.SIGN_IN);
+                    props.history.push({pathname : ROUTES.SIGN_IN, state: { message: 'Usuario Creado Correctamente!' }});
                 }else{
                     console.log('entro en el else')
-                    setValues({ ...INITIAL_STATE, error: 'Error intentando Loguearse, intente nuevamente' });
+                    setValues({ ...form, error: 'Error intentando Loguearse, intente nuevamente' });
                 }
 
             })
             .catch(error => {
-                setValues({ error });
+                setValues({ ...form, error });
             });
         event.preventDefault();
     }
@@ -179,10 +181,5 @@ const SignUpForm = compose(
 )(SignUpFormBaseFunctional);
 
 
-const SignUpLink = () => (
-    <p>
-        Don't have an account? <Link to={ROUTES.SIGN_UP}>Sign Up</Link>
-    </p>
-);
 export default SignUpPage;
-export { SignUpForm, SignUpLink };
+export { SignUpForm };

@@ -27,6 +27,7 @@ const INITIAL_STATE = {
     email: '',
     password: '',
     error: null,
+    message: "",
     cardAnimation: "cardHidden",
 
 };
@@ -89,6 +90,20 @@ const SignInFromBaseFunctional = (props) => {
                         }
                         close
                         color="danger"
+                        icon="info_outline"
+                    />
+                </GridItem>
+                }
+                {props.location.state &&
+                <GridItem xs={12} sm={12} md={12}>
+                    <SnackbarContent
+                        message={
+                            <span>
+                            <b>{props.location.state.message}</b>
+                          </span>
+                        }
+                        close
+                        color="success"
                         icon="info_outline"
                     />
                 </GridItem>

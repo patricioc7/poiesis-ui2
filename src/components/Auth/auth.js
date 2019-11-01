@@ -38,8 +38,6 @@ class Auth {
             originalRemoveItem.apply(this, arguments);
         };
 
-
-
     }
 
     getCurrentUser = () => {
@@ -62,7 +60,14 @@ class Auth {
     }
 
     doCreateUserWithEmailAndPassword = (username, email, password) =>{
-        return userService.register(username, email, password);
+        return userService.register(username, email, password).then((jwt) => {
+            if(jwt.length >45){
+                return true;
+            }else{
+                return false;
+            }
+
+        });
     }
 
 
@@ -78,18 +83,4 @@ class Auth {
 
 }
 
-/*
-    doCreateUserWithEmailAndPassword = (email, password) =>
-        this.auth.createUserWithEmailAndPassword(email, password);
-
-    doSignInWithEmailAndPassword = (email, password) =>
-        this.auth.signInWithEmailAndPassword(email, password);
-
-    doSignOut = () => this.auth.signOut();
-
-    doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
-
-    doPasswordUpdate = password =>
-        this.auth.currentUser.updatePassword(password);
-}*/
 export default Auth;

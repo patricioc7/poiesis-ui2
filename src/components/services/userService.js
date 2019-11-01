@@ -46,9 +46,13 @@ function register(username, email, password) {
     body: JSON.stringify({ name: username, email: email, password: password }),
   };
 
-  return fetch(`${apiUrl}/users/register`, requestOptions).then(
-      handleResponse,
-  );
+  return fetch(`${apiUrl}/users/register`, requestOptions)
+      .then(handleResponse)
+    .then(jwt => {
+    // store user details and jwt token in local storage to keep user logged in between page refreshes
+    console.log('llego jwt', jwt)
+    return jwt;
+  })
 }
 
 function getAll() {

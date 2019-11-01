@@ -18,10 +18,7 @@ import Icon from "@material-ui/core/Icon";
 import {makeStyles} from "@material-ui/core";
 
 const SignUpPage = () => (
-    <div>
-        <h1>SignUp</h1>
         <SignUpForm />
-    </div>
 );
 
 const INITIAL_STATE = {
@@ -35,7 +32,7 @@ const INITIAL_STATE = {
 
 const useStyles = makeStyles(styles);
 
-const SignUpFormBaseFunctional = () => {
+const SignUpFormBaseFunctional = (props) => {
     const [form, setValues] = useState({...INITIAL_STATE});
 
     //Fade In
@@ -47,21 +44,21 @@ const SignUpFormBaseFunctional = () => {
     }, []);
 
     const onSubmit = (event) => {
-        const { username, email, passwordOne } = this.state;
-        this.props.auth
+        const { username, email, passwordOne } = form;
+        props.auth
             .doCreateUserWithEmailAndPassword(username, email, passwordOne)
-            .then(authUser => {
-                if(authUser != null){
-                    this.setState({ ...INITIAL_STATE });
+            .then(result => {
+                if(result){
+                    setValues({ ...INITIAL_STATE });
                     this.props.history.push(ROUTES.SIGN_IN);
                 }else{
                     console.log('entro en el else')
-                    this.setState({ ...INITIAL_STATE, error: 'Error intentando Loguearse, intente nuevamente' });
+                    setValues({ ...INITIAL_STATE, error: 'Error intentando Loguearse, intente nuevamente' });
                 }
 
             })
             .catch(error => {
-                this.setState({ error });
+                setValues({ error });
             });
         event.preventDefault();
     }

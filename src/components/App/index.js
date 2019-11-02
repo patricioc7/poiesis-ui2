@@ -36,7 +36,7 @@ const App = (props) => {
                     <Route path={ROUTES.HOME} component={HomePage} />
                     <Route path={ROUTES.ADMIN} component={AdminPage} />
 
-                    <Route path={ROUTES.POSTVIEW}component={PostView} />
+                    <Route path={ROUTES.POSTVIEW} component={PostView} />
 
                     </div>
                 <Footer/>

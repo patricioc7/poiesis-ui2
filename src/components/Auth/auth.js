@@ -15,30 +15,7 @@ class Auth {
             this.user.name = loggedUserJson.name;
             this.user.token = loggedUserJson.token;
         }
-
-        const originalSetItem = localStorage.setItem;
-        const event = new Event('storageChange');
-
-        localStorage.setItem = function(key, value) {
-
-            event.value = value;
-            event.key = key;
-
-            document.dispatchEvent(event);
-
-            originalSetItem.apply(this, arguments);
-        };
-
-        const originalRemoveItem = localStorage.removeItem;
-        localStorage.removeItem = function(key) {
-
-            event.key = key;
-            event.value = null;
-            document.dispatchEvent(event);
-            originalRemoveItem.apply(this, arguments);
-        };
-
-    }
+       }
 
     getCurrentUser = () => {
         return this.user
@@ -82,6 +59,10 @@ class Auth {
     doSignOut = () => {
         console.log('Logged out!')
         localStorage.removeItem('user');
+        const sessionEvent = new Event('sessionEvent');
+        sessionEvent.value = null;
+        sessionEvent.key = 'signOut';
+        document.dispatchEvent(sessionEvent);
     }
 
 

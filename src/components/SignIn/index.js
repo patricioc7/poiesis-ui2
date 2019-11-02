@@ -6,7 +6,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'recompose';
 import { withAuth } from '../Auth';
-import { PasswordForgetLink } from '../PasswordForget';
 import * as ROUTES from '../../constants/routes';
 import CardBody from "../../MaterialKitComponets/Card/CardBody";
 import CustomInput from "../../MaterialKitComponets/CustomInput/CustomInput";
@@ -53,6 +52,10 @@ const SignInFromBaseFunctional = (props) => {
                 if(user != null){
                     setValues({ ...INITIAL_STATE });
                     console.log('Redireccionando a la home');
+                    const sessionEvent = new Event('sessionEvent');
+                    sessionEvent.value = user;
+                    sessionEvent.key = 'signIn';
+                    document.dispatchEvent(sessionEvent);
                     props.history.push(ROUTES.HOME);
                 }else{
                     const error = {message : 'Error intentando loguearse, intente nuevamente'}
@@ -160,7 +163,6 @@ const SignInFromBaseFunctional = (props) => {
                                             Continuar
                                         </Button>
                                     </GridItem>
-                                    <PasswordForgetLink />
                                 </GridContainer>
                             </CardFooter>
                         </form>

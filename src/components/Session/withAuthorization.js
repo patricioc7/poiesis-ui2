@@ -9,16 +9,14 @@ const withAuthorization = condition => Component => {
     class WithAuthorization extends React.Component {
        componentDidMount() {
 
-           const onStorageEvent = (storageEvent) => {
+           const onSessionEvent = (sessionEvent) => {
                console.log('entró al authorized')
-               if(storageEvent.key == "user"){
-                   if(!storageEvent.value){
+               if(sessionEvent.key == "signOut"){
                        this.props.history.push(ROUTES.SIGN_IN);
-                   }
                }
            }
 
-           this.listener = document.addEventListener("storageChange", onStorageEvent, false);
+           this.listener = document.addEventListener("sessionEvent", onSessionEvent, false);
 
     }
     componentWillUnmount() {

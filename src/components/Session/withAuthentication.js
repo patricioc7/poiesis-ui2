@@ -14,23 +14,23 @@ const withAuthentication = Component => {
         componentDidMount = () => {
             console.log('se montó');
 
-            const onStorageEvent = (storageEvent) => {
-                if(storageEvent.key == "user"){
+            const onSessionEvent = (sessionEvent) => {
+                if(sessionEvent.key == "signIn"){
                     console.log("+++++++++++")
-                    console.log(storageEvent.key);
-                    console.log(storageEvent.value);
+                    console.log(sessionEvent.key);
+                    console.log(sessionEvent.value);
                     console.log("+++++++++++")
-                    if(!storageEvent.value){
-                        console.log('cambio el estado a logged OUT en withauthentication');
-                        this.setState({authUser : null})
-                    }else{
+                    if(sessionEvent.value){
                         console.log('cambio el estado a logged en withauthentication');
                         this.setState({authUser : this.props.auth.user})
                     }
+                }else{
+                    console.log('cambio el estado a logged OUT en withauthentication');
+                    this.setState({authUser : null})
                 }
             }
 
-            this.listener = document.addEventListener("storageChange", onStorageEvent, false);
+            this.listener = document.addEventListener("sessionEvent", onSessionEvent, false);
 
         }
         componentWillUnmount() {

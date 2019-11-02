@@ -1,6 +1,6 @@
 {
   "name": "react-firebase-authentication",
-  "version": "0.1.0",
+  "version": "0.1.4",
   "private": true,
   "proxy": "http://localhost:8080",
   "dependencies": {
@@ -16,7 +16,6 @@
     "nouislider": "14.0.2",
     "prop-types": "15.7.2",
     "moment": "2.24.0",
-    "firebase": "^7.0.0",
     "html-loader": "^0.5.5",
     "react": "^16.9.0",
     "react-app-polyfill": "^1.0.3",

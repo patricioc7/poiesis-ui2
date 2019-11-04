@@ -2,6 +2,7 @@ import { authHeader } from '../_helpers/authHeader';
 
 export const postService = {
     getPost,
+    getRecentPosts,
 
 };
 
@@ -25,13 +26,33 @@ function getPost(id, jwt) {
         }).catch(error => {
                 throw error
             }
+        );
+}
 
-    );
+function getRecentPosts(jwt) {
+    console.log('entró4');
+    console.log("/77777777777777", jwt)
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token: jwt}),
+    };
+
+    return fetch(`${apiUrl}/getAllPosts`, requestOptions)
+        .then(handleResponse)
+        .then(post => {
+            // store user details and jwt token in local storage to keep user logged in between page refreshes
+            console.log('llego post', post)
+            return post;
+        }).catch(error => {
+                throw error
+            }
+
+        );
 }
 
 
 function handleResponse(response) {
-    console.log(response.body);
     return response.text().then(text => {
         const data = text && JSON.parse(text);
         console.log('DATA', data);

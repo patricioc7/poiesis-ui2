@@ -73,7 +73,7 @@ const NavigationAuth = (props) => {
                 <List className={classes.list}>
                     <ListItem className={classes.listItem}>
                         <Button
-                            href="#pablo"
+                            href={ROUTES.NEWPOST}
                             className={classes.navLink}
                             onClick={e => e.preventDefault()}
                             color="transparent"

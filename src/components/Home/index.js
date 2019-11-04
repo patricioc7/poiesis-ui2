@@ -5,8 +5,6 @@ import GridContainer from "../../MaterialKitComponets/Grid/GridContainer";
 import GridItem from "../../MaterialKitComponets/Grid/GridItem";
 import CustomTabs from "../../MaterialKitComponets/CustomTabs/CustomTabs";
 import TurnedIn from "@material-ui/icons/TurnedIn";
-import Chat from "@material-ui/icons/Chat";
-import Build from "@material-ui/icons/Build";
 import {makeStyles} from "@material-ui/core";
 import styles from "../../assets/jss/material-kit-react/views/componentsSections/tabsStyle";
 const useStyles = makeStyles(styles);

@@ -14,6 +14,7 @@ import * as ROUTES from '../../constants/routes';
 import { withAuthentication } from '../Session';
 import PostView from "../PostView";
 import '../../assets/css/main.css';
+import NewPost from "../NewPost";
 
 
 const App = (props) => {
@@ -37,6 +38,7 @@ const App = (props) => {
                     <Route path={ROUTES.ADMIN} component={AdminPage} />
 
                     <Route path={ROUTES.POSTVIEW} component={PostView} />
+                    <Route path={ROUTES.NEWPOST} component={NewPost} />
 
                     </div>
                 <Footer/>

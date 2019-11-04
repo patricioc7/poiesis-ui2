@@ -3,6 +3,7 @@ import { authHeader } from '../_helpers/authHeader';
 export const postService = {
     getPost,
     getRecentPosts,
+    newPost,
 
 };
 
@@ -50,6 +51,29 @@ function getRecentPosts(jwt) {
 
         );
 }
+
+function newPost(jwt, title, content) {
+    console.log('entró4');
+    console.log("/77777777777777", jwt)
+    const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ token: jwt, content : content, title : title}),
+    };
+
+    return fetch(`${apiUrl}/post/new`, requestOptions)
+        .then(handleResponse)
+        .then(post => {
+            // store user details and jwt token in local storage to keep user logged in between page refreshes
+            console.log('llego post', post)
+            return post;
+        }).catch(error => {
+                throw error
+            }
+
+        );
+}
+
 
 
 function handleResponse(response) {

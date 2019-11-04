@@ -73,7 +73,7 @@ api.post('/post/new/', (req, res) => {
         'http://localhost:8080/post/new',
         {
             json: {
-                name: req.body.name,
+                title: req.body.title,
                 userId: req.body.userId,
                 content: req.body.content,
                 password: req.body.password,

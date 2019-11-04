@@ -4,10 +4,6 @@ import styles from "../../assets/jss/material-kit-react/views/componentsSections
 import { makeStyles } from "@material-ui/core/styles";
 import GridContainer from "../../MaterialKitComponets/Grid/GridContainer";
 import GridItem from "../../MaterialKitComponets/Grid/GridItem";
-import TurnedIn from "@material-ui/icons/TurnedIn";
-import Chat from "@material-ui/icons/Chat";
-import Build from "@material-ui/icons/Build";
-import CustomTabs from "../../MaterialKitComponets/CustomTabs/CustomTabs";
 import { postService } from '../services/postService';
 import {AuthUserContext, withAuthorization} from "../Session";
 import * as ROUTES from "../../constants/routes";

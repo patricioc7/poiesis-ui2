@@ -24,16 +24,23 @@ const PostView = (props) => {
 
     const [values, setValues] = useState({...INITIAL_STATE});
 
-    useEffect(async () => {
-        console.log('props en postview', props.auth);
-        const result = await postService.getPost(props.match.params.postid, props.auth.token);
-        console.log('resulto:',result);
-        setValues({ ...values, postData :  JSON.parse(result.body),});
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await postService.getPost(props.match.params.postid, props.auth.token)
+                .then(post => {
+                    setValues({ ...values, postData :   JSON.parse(post.body),});
+                }).catch(error => {
+                        throw error
+                    }
+
+                );
+        }
+        fetchData()
     }, [] );
 
     const classes = useStyles();
     const content = values.postData.content;
-    const title = values.postData.title;
+    const title = values.postData.title ? values.postData.title : "cargando";
     return(
         <div >
             <div className={classes.maincontainer}>

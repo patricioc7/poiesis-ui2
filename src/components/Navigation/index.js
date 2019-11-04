@@ -5,7 +5,6 @@ import ListItem from '@material-ui/core/ListItem';
 import * as ROUTES from '../../constants/routes';
 import { AuthUserContext } from '../Session';
 import Button from "../../MaterialKitComponets/CustomButtons/Button";
-import Email from "@material-ui/core/SvgIcon/SvgIcon";
 import CustomDropdown from "../../MaterialKitComponets/CustomDropdown/CustomDropdown";
 import Header from "../../MaterialKitComponets/Header/Header";
 
@@ -79,17 +78,6 @@ const NavigationAuth = (props) => {
                             color="transparent"
                         >
                             Nuevo Post
-                        </Button>
-                    </ListItem>
-                    <ListItem className={classes.listItem}>
-                        <Button
-                            justIcon
-                            round
-                            href={ROUTES.SIGN_IN}
-                            className={classes.notificationNavLink}
-                            color="blue"
-                        >
-                            <Email className={classes.icons} />
                         </Button>
                     </ListItem>
                     <ListItem className={classes.listItem}>

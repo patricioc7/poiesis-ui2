@@ -19,11 +19,18 @@ const HomePage = (props) => {
 
     const [values, setValues] = useState({...INITIAL_STATE});
 
-    useEffect(async () => {
-        console.log('props en postview', props);
-        const result = await postService.getRecentPosts(props.auth.token);
-        console.log('resulto:',result)
-        setValues({ ...values, postData :  JSON.parse(result.body),});
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = await postService.getRecentPosts(props.auth.token)
+                .then(post => {
+                    setValues({ ...values, postData :   JSON.parse(post.body),});
+                }).catch(error => {
+                        throw error
+                    }
+
+                );
+        }
+        fetchData()
     }, [] );
 
     let arr = [];
@@ -34,7 +41,7 @@ const HomePage = (props) => {
     return(
         <div >
             <div className={classes.maincontainer}>
-                {arr.map(item =>
+                {arr.reverse().map(item =>
                     <GridContainer >
                         <GridItem xs={12} sm={12} md={12}>
                             <CustomTabs

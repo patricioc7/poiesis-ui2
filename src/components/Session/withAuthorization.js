@@ -10,7 +10,6 @@ const withAuthorization = condition => Component => {
        componentDidMount() {
 
            const onSessionEvent = (sessionEvent) => {
-               console.log('entró al authorized')
                if(sessionEvent.key == "signOut"){
                        this.props.history.push(ROUTES.SIGN_IN);
                }

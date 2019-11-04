@@ -21,7 +21,7 @@ const HomePage = (props) => {
 
     useEffect(async () => {
         console.log('props en postview', props);
-        const result = await postService.getRecentPosts('eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJjcmVhdGVkQXQiOjE1NzIzNzA1MDgsInVzZXJJZCI6IjVkNmZiY2QzZTE4ZDk4M2U4YjkyYjBlMiJ9.oXhC2OPM5DB3Sgz6fJnhFJnn76vDYT6EYQCyUHjEuJQ')
+        const result = await postService.getRecentPosts(props.auth.token);
         console.log('resulto:',result)
         setValues({ ...values, postData :  JSON.parse(result.body),});
     }, [] );

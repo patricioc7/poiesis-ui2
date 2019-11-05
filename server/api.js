@@ -26,7 +26,7 @@ api.post('/users/authenticate/', (req, res) => {
                 res.status(500);
             }
             console.log('este es el bodi', body);
-            res.status(200).json({ jwt: body.token, userName: body.name });
+            res.status(200).json({ jwt: body.token, userName: body.name, userId: body.userId });
 
         },
     );

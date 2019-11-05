@@ -52,13 +52,13 @@ function getRecentPosts(jwt) {
         );
 }
 
-function newPost(jwt, title, content) {
+function newPost(jwt, title, content, userId) {
     console.log('entró4');
     console.log("/77777777777777", jwt)
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token: jwt, content : content, title : title}),
+        body: JSON.stringify({ token: jwt, content : content, title : title, userId: userId}),
     };
 
     return fetch(`${apiUrl}/post/new`, requestOptions)

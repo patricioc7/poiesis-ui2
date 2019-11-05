@@ -57,7 +57,6 @@ const SignUpFormBaseFunctional = (props) => {
                     console.log('entro en el else')
                     setValues({ ...form, error: 'Error intentando Loguearse, intente nuevamente' });
                 }
-
             })
             .catch(error => {
                 setValues({ ...form, error });

@@ -7,8 +7,13 @@ import CustomTabs from "../../MaterialKitComponets/CustomTabs/CustomTabs";
 import TurnedIn from "@material-ui/icons/TurnedIn";
 import {makeStyles} from "@material-ui/core";
 import styles from "../../assets/jss/material-kit-react/views/componentsSections/tabsStyle";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import CardHeader from "../../MaterialKitComponets/Card/CardHeader";
+import CardBody from "../../MaterialKitComponets/Card/CardBody";
+import CardFooter from "../../MaterialKitComponets/Card/CardFooter";
+import Card from "../../MaterialKitComponets/Card/Card";
+import * as ROUTES from "../../constants/routes";
+import Link from "@material-ui/core/Link";
 const useStyles = makeStyles(styles);
 const INITIAL_STATE = {
     postData: {},
@@ -44,7 +49,6 @@ const HomePage = (props) => {
     const classes = useStyles();
     return(
         <div >
-
             <div className={classes.maincontainer}>
                 {isLoading ? (
                     <LinearProgress />
@@ -53,20 +57,22 @@ const HomePage = (props) => {
                         {arr.reverse().map(item =>
                             <GridContainer >
                                 <GridItem xs={12} sm={12} md={12}>
-                                    <CustomTabs
-                                        headerColor="primary"
-                                        tabs={[
-                                            {
-                                                tabName: item.title,
-                                                tabIcon: TurnedIn,
-                                                tabContent: (
-                                                    <p className={classes.textCenter}>
-                                                        {item.content}
-                                                    </p>
-                                                )
-                                            },
-                                        ]}
-                                    /> </GridItem>
+
+                                    <Card>
+                                        <CardHeader color="primary">
+                                            <div><TurnedIn/><Link href={"/postview/" + item.postId}><h4>{item.title}</h4></Link></div>
+                                        </CardHeader>
+                                        <CardBody>
+                                            <p className={classes.textCenter}>
+                                                {item.content}
+                                            </p>
+                                        </CardBody>
+                                        <CardFooter>
+                                            <p>Posteado por: <Link href={item.userId}>{item.userName}</Link></p>
+                                        </CardFooter>
+
+                                    </Card>
+                                    </GridItem>
                             </GridContainer>
                         )}
                     </div>

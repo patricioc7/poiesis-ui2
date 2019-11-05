@@ -5,12 +5,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import GridContainer from "../../MaterialKitComponets/Grid/GridContainer";
 import GridItem from "../../MaterialKitComponets/Grid/GridItem";
 import TurnedIn from "@material-ui/icons/TurnedIn";
-import Chat from "@material-ui/icons/Chat";
-import Build from "@material-ui/icons/Build";
-import CustomTabs from "../../MaterialKitComponets/CustomTabs/CustomTabs";
 import { postService } from '../services/postService';
 import { withAuthorization} from "../Session";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import Card from "../../MaterialKitComponets/Card/Card";
+import CardHeader from "../../MaterialKitComponets/Card/CardHeader";
+import CardBody from "../../MaterialKitComponets/Card/CardBody";
+import CardFooter from "../../MaterialKitComponets/Card/CardFooter";
 const useStyles = makeStyles(styles);
 
 const INITIAL_STATE = {
@@ -34,7 +35,7 @@ const PostView = (props) => {
                     setValues({ ...values, postData :   JSON.parse(post.body),});
                     setIsLoading(false);
                 }).catch(error => {
-                        throw error
+                        console.log(error)
                     }
 
                 );
@@ -45,6 +46,8 @@ const PostView = (props) => {
     const classes = useStyles();
     const content = values.postData.content;
     const title = values.postData.title ? values.postData.title : "cargando";
+    const userName = values.postData.userName ? values.postData.userName : "cargando";
+    const userId = values.postData.userId ? values.postData.userId : "cargando";
     return(
         <div >
             <div className={classes.maincontainer}>
@@ -53,52 +56,21 @@ const PostView = (props) => {
                 ) : (
                 <GridContainer >
                     <GridItem xs={12} sm={12} md={12}>
-                        <CustomTabs
-                            headerColor="primary"
-                            tabs={[
-                                {
-                                    tabName: title,
-                                    tabIcon: TurnedIn,
-                                    tabContent: (
-                                        <p className={classes.textCenter}>
-                                           {content}
-                                        </p>
-                                    )
-                                },
-                                {
-                                    tabName: "Messages",
-                                    tabIcon: Chat,
-                                    tabContent: (
-                                        <p className={classes.textCenter}>
-                                            I think that’s a responsibility that I have, to push
-                                            possibilities, to show people, this is the level that
-                                            things could be at. I will be the leader of a company
-                                            that ends up being worth billions of dollars, because I
-                                            got the answers. I understand culture. I am the nucleus.
-                                            I think that’s a responsibility that I have, to push
-                                            possibilities, to show people, this is the level that
-                                            things could be at.
-                                        </p>
-                                    )
-                                },
-                                {
-                                    tabName: "Settings",
-                                    tabIcon: Build,
-                                    tabContent: (
-                                        <p className={classes.textCenter}>
-                                            think that’s a responsibility that I have, to push
-                                            possibilities, to show people, this is the level that
-                                            things could be at. So when you get something that has
-                                            the name Kanye West on it, it’s supposed to be pushing
-                                            the furthest possibilities. I will be the leader of a
-                                            company that ends up being worth billions of dollars,
-                                            because I got the answers. I understand culture. I am
-                                            the nucleus.
-                                        </p>
-                                    )
-                                }
-                            ]}
-                        />
+
+                        <Card>
+                            <CardHeader color="primary">
+                                <div><TurnedIn/>{title}</div>
+                            </CardHeader>
+                            <CardBody>
+                                <p className={classes.textCenter}>
+                                    {content}
+                                </p>
+                            </CardBody>
+                            <CardFooter>
+                                <p>Posteado por: <a href={userId}>{userName}</a></p>
+                            </CardFooter>
+
+                        </Card>
                     </GridItem>
                 </GridContainer>
                     )}

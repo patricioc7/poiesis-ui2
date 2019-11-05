@@ -23,7 +23,6 @@ function login(username, pass) {
     return fetch(`${apiUrl}/users/authenticate`, requestOptions)
         .then(handleResponse)
         .then(user => {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
             console.log('llego user', user)
             return user;
         }).catch(error => {

@@ -5,7 +5,8 @@ class Auth {
     user = {
         isLoggedIn : false,
         name : "",
-        token :"",
+        token : "",
+        userId : "",
     }
 
     constructor() {
@@ -14,6 +15,7 @@ class Auth {
             this.user.isLoggedIn = loggedUserJson.isLoggedIn;
             this.user.name = loggedUserJson.name;
             this.user.token = loggedUserJson.token;
+            this.user.userId = loggedUserJson.userId;
         }
        }
 
@@ -27,6 +29,7 @@ class Auth {
                this.user.isLoggedIn = true;
                this.user.name = user.userName;
                this.user.token = user.jwt;
+               this.user.userId = user.userId;
                localStorage.setItem('user', JSON.stringify(this.user));
                console.log(this.user);
                return this.user;

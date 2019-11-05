@@ -38,10 +38,12 @@ const NewPost = (props) => {
         return () => clearTimeout(timer);
     }, []);
 
+    const userId = props.auth.userId;
+
     const onSubmit = event => {
         const { title, content } = form;
         postService.newPost
-        ( props.auth.token, title, content )
+        ( props.auth.token, title, content, userId)
             .then((user) => {
                 if(user != null){
                     setValues({ ...INITIAL_STATE });

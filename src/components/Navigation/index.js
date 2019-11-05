@@ -74,7 +74,6 @@ const NavigationAuth = (props) => {
                         <Button
                             href={ROUTES.NEWPOST}
                             className={classes.navLink}
-                            onClick={e => e.preventDefault()}
                             color="transparent"
                         >
                             Nuevo Post

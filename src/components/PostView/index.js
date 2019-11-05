@@ -9,7 +9,8 @@ import Chat from "@material-ui/icons/Chat";
 import Build from "@material-ui/icons/Build";
 import CustomTabs from "../../MaterialKitComponets/CustomTabs/CustomTabs";
 import { postService } from '../services/postService';
-import {AuthUserContext, withAuthorization} from "../Session";
+import { withAuthorization} from "../Session";
+import LinearProgress from "@material-ui/core/LinearProgress";
 const useStyles = makeStyles(styles);
 
 const INITIAL_STATE = {
@@ -23,12 +24,15 @@ const INITIAL_STATE = {
 const PostView = (props) => {
 
     const [values, setValues] = useState({...INITIAL_STATE});
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
+            setIsLoading(true);
             const result = await postService.getPost(props.match.params.postid, props.auth.token)
                 .then(post => {
                     setValues({ ...values, postData :   JSON.parse(post.body),});
+                    setIsLoading(false);
                 }).catch(error => {
                         throw error
                     }
@@ -44,6 +48,9 @@ const PostView = (props) => {
     return(
         <div >
             <div className={classes.maincontainer}>
+                {isLoading ? (
+                    <LinearProgress />
+                ) : (
                 <GridContainer >
                     <GridItem xs={12} sm={12} md={12}>
                         <CustomTabs
@@ -94,6 +101,7 @@ const PostView = (props) => {
                         />
                     </GridItem>
                 </GridContainer>
+                    )}
             </div>
         </div>
     )

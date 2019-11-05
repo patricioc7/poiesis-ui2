@@ -7,6 +7,8 @@ import CustomTabs from "../../MaterialKitComponets/CustomTabs/CustomTabs";
 import TurnedIn from "@material-ui/icons/TurnedIn";
 import {makeStyles} from "@material-ui/core";
 import styles from "../../assets/jss/material-kit-react/views/componentsSections/tabsStyle";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import LinearProgress from "@material-ui/core/LinearProgress";
 const useStyles = makeStyles(styles);
 const INITIAL_STATE = {
     postData: {},
@@ -18,12 +20,14 @@ const INITIAL_STATE = {
 const HomePage = (props) => {
 
     const [values, setValues] = useState({...INITIAL_STATE});
-
+    const [isLoading, setIsLoading] = useState(false);
     useEffect(() => {
         const fetchData = async () => {
+            setIsLoading(true);
             const result = await postService.getRecentPosts(props.auth.token)
                 .then(post => {
                     setValues({ ...values, postData :   JSON.parse(post.body),});
+                    setIsLoading(false);
                 }).catch(error => {
                         throw error
                     }
@@ -40,30 +44,39 @@ const HomePage = (props) => {
     const classes = useStyles();
     return(
         <div >
+
             <div className={classes.maincontainer}>
-                {arr.reverse().map(item =>
-                    <GridContainer >
-                        <GridItem xs={12} sm={12} md={12}>
-                            <CustomTabs
-                                headerColor="primary"
-                                tabs={[
-                                    {
-                                        tabName: item.title,
-                                        tabIcon: TurnedIn,
-                                        tabContent: (
-                                            <p className={classes.textCenter}>
-                                                {item.content}
-                                            </p>
-                                        )
-                                    },
-                                ]}
-                            /> </GridItem>
-                    </GridContainer>
-                )}
+                {isLoading ? (
+                    <LinearProgress />
+                ) : (
+                    <div>
+                        {arr.reverse().map(item =>
+                            <GridContainer >
+                                <GridItem xs={12} sm={12} md={12}>
+                                    <CustomTabs
+                                        headerColor="primary"
+                                        tabs={[
+                                            {
+                                                tabName: item.title,
+                                                tabIcon: TurnedIn,
+                                                tabContent: (
+                                                    <p className={classes.textCenter}>
+                                                        {item.content}
+                                                    </p>
+                                                )
+                                            },
+                                        ]}
+                                    /> </GridItem>
+                            </GridContainer>
+                        )}
+                    </div>
+               )}
             </div>
         </div>
     )
 };
+
+
 
 const condition = authUser => !!authUser;
 export default withAuthorization(condition)(HomePage);

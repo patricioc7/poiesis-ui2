@@ -1,15 +1,14 @@
 const api = require('express').Router();
 const request = require('request');
 
-api.get('/holis/', (req, res) => {
-    res.status(200).json({ message: 'ahi va!' });
-});
+const apiBaseUrl = 'https://poiesis-api.herokuapp.com/';
+const clientSecret = 'wolololoaka';
+
 ///////USER METHODS
 //User Login
 api.post('/users/authenticate/', (req, res) => {
-    console.log("////////LOGGIN USER");
     request.post(
-        'http://localhost:8080/user/login',
+        apiBaseUrl + '/user/login',
         {
             json: {
                 email: req.body.email,
@@ -17,7 +16,7 @@ api.post('/users/authenticate/', (req, res) => {
             },
             headers: {
                 'Content-Type': 'application/json',
-                'x-clientSecret': 'wolololoaka',
+                'x-clientSecret': clientSecret,
             },
         },
         (error, res2, body) => {
@@ -26,9 +25,7 @@ api.post('/users/authenticate/', (req, res) => {
                 res.status(500);
             }
             console.log('este es el bodi', body);
-
             res.status(200).json({ jwt: body.token, userName: body.name });
-
 
         },
     );
@@ -36,9 +33,8 @@ api.post('/users/authenticate/', (req, res) => {
 
 //User Registration
 api.post('/users/register/', (req, res) => {
-    console.log("////////REGISTERING USER");
     request.post(
-        'http://localhost:8080/user/register',
+        apiBaseUrl + '/user/register',
         {
             json: {
                 name: req.body.name,
@@ -47,7 +43,7 @@ api.post('/users/register/', (req, res) => {
             },
             headers: {
                 'Content-Type': 'application/json',
-                'x-clientSecret': 'wolololoaka',
+                'x-clientSecret': clientSecret,
             },
         },
         (error, res2, body) => {
@@ -56,8 +52,6 @@ api.post('/users/register/', (req, res) => {
                 console.error(error);
                 return;
             }
-            console.log(res2);
-            console.log(body);
             res.status(200).json({ body });
         },
     );
@@ -68,9 +62,8 @@ api.post('/users/register/', (req, res) => {
 /////POST METHODS
 //New Post
 api.post('/post/new/', (req, res) => {
-    console.log("////////WRITTING NEW POST TO API");
     request.post(
-        'http://localhost:8080/post/new',
+        apiBaseUrl + '/post/new',
         {
             json: {
                 title: req.body.title,
@@ -81,7 +74,7 @@ api.post('/post/new/', (req, res) => {
             headers: {
                 'authorization': req.body.token,
                 'Content-Type': 'application/json',
-                'x-clientSecret': 'wolololoaka',
+                'x-clientSecret': clientSecret,
             },
         },
         (error, res2, body) => {
@@ -90,8 +83,6 @@ api.post('/post/new/', (req, res) => {
                 console.error(error);
                 return;
             }
-            console.log(res2);
-            console.log(body);
             res.status(200).json({ body });
         },
     );
@@ -102,12 +93,12 @@ api.post('/post/', (req, res) => {
     console.log("////////GETTING POST " + req.body.postId + " FROM  API");
     console.log(req.body);
     request.get(
-        'http://localhost:8080/post/' + req.body.postId,
+        apiBaseUrl + '/post/' + req.body.postId,
         {
             headers: {
                 'authorization': req.body.token,
                 'Content-Type': 'application/json',
-                'x-clientSecret': 'wolololoaka',
+                'x-clientSecret': clientSecret,
             },
         },
         (error, res2, body) => {
@@ -127,12 +118,12 @@ api.post('/post/', (req, res) => {
 api.get('/getAllPostsByUser/', (req, res) => {
     console.log("////////GETTING ALL POSTS FORM USER" + req.body.userId + " FROM  API");
     request.get(
-        'http://localhost:8080/post/user/' + req.body.userId,
+        apiBaseUrl + '/post/user/' + req.body.userId,
         {
             headers: {
                 'authorization': req.body.token,
                 'Content-Type': 'application/json',
-                'x-clientSecret': 'wolololoaka',
+                'x-clientSecret': clientSecret,
             },
         },
         (error, res2, body) => {
@@ -152,12 +143,12 @@ api.get('/getAllPostsByUser/', (req, res) => {
 api.post('/getAllPosts/', (req, res) => {
     console.log("////////GETTING ALL POSTS FORM API");
     request.get(
-        'http://localhost:8080/post/',
+        apiBaseUrl + '/post/',
         {
             headers: {
                 'authorization': req.body.token,
                 'Content-Type': 'application/json',
-                'x-clientSecret': 'wolololoaka',
+                'x-clientSecret': clientSecret,
             },
         },
         (error, res2, body) => {
@@ -166,11 +157,14 @@ api.post('/getAllPosts/', (req, res) => {
                 console.error(error);
                 return;
             }
-            console.log(res2);
-            console.log(body);
             res.status(200).json({ body });
         },
     );
+});
+
+///Dummy get
+api.get('/holis/', (req, res) => {
+    res.status(200).json({ message: 'ahi va!' });
 });
 
 module.exports = api;

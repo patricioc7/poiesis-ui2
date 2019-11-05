@@ -5,7 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import GridContainer from "../../MaterialKitComponets/Grid/GridContainer";
 import GridItem from "../../MaterialKitComponets/Grid/GridItem";
 import { postService } from '../services/postService';
-import {AuthUserContext, withAuthorization} from "../Session";
+import { withAuthorization} from "../Session";
 import * as ROUTES from "../../constants/routes";
 import SnackbarContent from "../../MaterialKitComponets/Snackbar/SnackbarContent";
 import Card from "../../MaterialKitComponets/Card/Card";

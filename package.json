@@ -3,6 +3,9 @@
   "version": "0.1.4",
   "private": true,
   "proxy": "http://localhost:8080",
+  "engines": {
+    "node": "8.16.2"
+  },
   "dependencies": {
     "@babel/core": "^7.6.2",
     "@babel/preset-env": "^7.6.2",

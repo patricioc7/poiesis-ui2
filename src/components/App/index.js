@@ -16,15 +16,7 @@ import PostView from "../PostView";
 import '../../assets/css/main.css';
 import NewPost from "../NewPost";
 
-
 const App = (props) => {
-
-    useEffect(() => {
-        console.log('Estrellitas y boludeces');
-        console.log(props);
-        console.log(props.auth.isLoggedIn());
-    });
-
     return (
         <Router>
             <div>
@@ -36,14 +28,12 @@ const App = (props) => {
                     <Route path={ROUTES.SIGN_IN} component={SignInPage} />
                     <Route path={ROUTES.HOME} component={HomePage} />
                     <Route path={ROUTES.ADMIN} component={AdminPage} />
-
                     <Route path={ROUTES.POSTVIEW} component={PostView} />
                     <Route path={ROUTES.NEWPOST} component={NewPost} />
 
                     </div>
                 <Footer/>
                 </div>
-
         </Router>
     );
 }

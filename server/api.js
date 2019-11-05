@@ -1,7 +1,8 @@
 const api = require('express').Router();
 const request = require('request');
 
-const apiBaseUrl = 'https://poiesis-api.herokuapp.com/';
+//const apiBaseUrl = 'https://poiesis-api.herokuapp.com/';
+const apiBaseUrl = 'http://localhost:8080/';
 const clientSecret = 'wolololoaka';
 
 ///////USER METHODS

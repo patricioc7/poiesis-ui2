@@ -45,9 +45,9 @@ const SignUpFormBaseFunctional = (props) => {
     }, []);
 
     const onSubmit = (event) => {
-        const { username, email, passwordOne } = form;
+        const { name, email, passwordOne } = form;
         props.auth
-            .doCreateUserWithEmailAndPassword(username, email, passwordOne)
+            .doCreateUserWithEmailAndPassword(name, email, passwordOne)
             .then(result => {
                 setValues({ ...INITIAL_STATE });
                 console.log('result on page',result);

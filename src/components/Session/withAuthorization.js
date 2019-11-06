@@ -18,9 +18,7 @@ const withAuthorization = condition => Component => {
            this.listener = document.addEventListener("sessionEvent", onSessionEvent, false);
 
     }
-    componentWillUnmount() {
-        this.listener;
-    }
+ 
         render() {
             return(
                 <AuthUserContext.Consumer>

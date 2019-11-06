@@ -1,8 +1,8 @@
 const api = require('express').Router();
 const request = require('request');
 
-//const apiBaseUrl = 'https://poiesis-api.herokuapp.com/';
-const apiBaseUrl = 'http://localhost:8080/';
+const apiBaseUrl = 'https://poiesis-api.herokuapp.com/';
+//const apiBaseUrl = 'http://localhost:8080/';
 const clientSecret = 'wolololoaka';
 
 ///////USER METHODS
@@ -26,7 +26,7 @@ api.post('/users/authenticate/', (req, res) => {
                 res.status(500);
             }
             console.log('este es el bodi', body);
-            res.status(200).json({ jwt: body.token, userName: body.name, userId: body.userId });
+            res.status(200).json({jwt: body.token, userName: body.name, userId: body.userId});
 
         },
     );
@@ -53,11 +53,10 @@ api.post('/users/register/', (req, res) => {
                 console.error(error);
                 return;
             }
-            res.status(200).json({ body });
+            res.status(200).json({body});
         },
     );
 });
-
 
 
 /////POST METHODS
@@ -84,7 +83,7 @@ api.post('/post/new/', (req, res) => {
                 console.error(error);
                 return;
             }
-            res.status(200).json({ body });
+            res.status(200).json({body});
         },
     );
 });
@@ -110,7 +109,7 @@ api.post('/post/', (req, res) => {
             }
             console.log(res2);
             console.log(body);
-            res.status(200).json({ body });
+            res.status(200).json({body});
         },
     );
 });
@@ -135,7 +134,7 @@ api.get('/getAllPostsByUser/', (req, res) => {
             }
             console.log(res2);
             console.log(body);
-            res.status(200).json({ body });
+            res.status(200).json({body});
         },
     );
 });
@@ -158,14 +157,71 @@ api.post('/getAllPosts/', (req, res) => {
                 console.error(error);
                 return;
             }
-            res.status(200).json({ body });
+            res.status(200).json({body});
         },
     );
 });
 
+
+////COMMENT METHODS
+
+api.post('/comment/new/', (req, res) => {
+    request.post(
+        apiBaseUrl + '/comment/new',
+        {
+            json: {
+                postId: req.body.postId,
+                userId: req.body.userId,
+                content: req.body.content,
+                userName: req.body.userName,
+            },
+            headers: {
+                'authorization': req.body.token,
+                'Content-Type': 'application/json',
+                'x-clientSecret': clientSecret,
+            },
+        },
+        (error, res2, body) => {
+
+            if (error) {
+                console.error(error);
+                return;
+            }
+            res.status(200).json({body});
+        },
+    );
+});
+
+
+api.post('/commentbypost/', (req, res) => {
+    console.log("////////GETTING POST " + req.body.postId + " FROM  API");
+    console.log(req.body);
+    request.get(
+        apiBaseUrl + '/comment/bypost/' + req.body.postId,
+        {
+            headers: {
+                'authorization': req.body.token,
+                'Content-Type': 'application/json',
+                'x-clientSecret': clientSecret,
+            },
+        },
+        (error, res2, body) => {
+
+            if (error) {
+                console.error(error);
+                return;
+            }
+            console.log(res2);
+            console.log(body);
+            res.status(200).json({body});
+        },
+    );
+});
+
+
 ///Dummy get
 api.get('/holis/', (req, res) => {
-    res.status(200).json({ message: 'ahi va!' });
+    res.status(200).json({message: 'ahi va!'});
 });
 
 module.exports = api;

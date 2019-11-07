@@ -35,7 +35,6 @@ const withAuthentication = Component => {
         }
         componentWillUnmount() {
             console.log('entró al unmount');
-            this.listener;
         }
         render() {
             return (

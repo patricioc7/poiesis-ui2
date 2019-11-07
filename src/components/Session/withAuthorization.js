@@ -18,7 +18,7 @@ const withAuthorization = condition => Component => {
            this.listener = document.addEventListener("sessionEvent", onSessionEvent, false);
 
     }
- 
+
         render() {
             return(
                 <AuthUserContext.Consumer>

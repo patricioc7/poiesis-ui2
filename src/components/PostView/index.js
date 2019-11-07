@@ -12,6 +12,7 @@ import Card from "../../MaterialKitComponets/Card/Card";
 import CardHeader from "../../MaterialKitComponets/Card/CardHeader";
 import CardBody from "../../MaterialKitComponets/Card/CardBody";
 import CardFooter from "../../MaterialKitComponets/Card/CardFooter";
+import Comments from "../Comments"
 const useStyles = makeStyles(styles);
 
 const INITIAL_STATE = {
@@ -72,6 +73,7 @@ const PostView = (props) => {
 
                         </Card>
                     </GridItem>
+                    <Comments postId={props.match.params.postid}/>
                 </GridContainer>
                     )}
             </div>

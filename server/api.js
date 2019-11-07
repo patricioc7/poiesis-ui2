@@ -1,8 +1,8 @@
 const api = require('express').Router();
 const request = require('request');
 
-const apiBaseUrl = 'https://poiesis-api.herokuapp.com/';
-//const apiBaseUrl = 'http://localhost:8080/';
+const apiBaseUrl = 'https://poiesis-api.herokuapp.com';
+//const apiBaseUrl = 'http://localhost:8080';
 const clientSecret = 'wolololoaka';
 
 ///////USER METHODS
@@ -167,7 +167,7 @@ api.post('/getAllPosts/', (req, res) => {
 
 api.post('/comment/new/', (req, res) => {
     request.post(
-        apiBaseUrl + '/comment/new',
+        apiBaseUrl + '/comment/new/',
         {
             json: {
                 postId: req.body.postId,

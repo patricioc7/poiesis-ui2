@@ -84,8 +84,6 @@ function handleResponse(response) {
         if (!response.ok || response.status == 500)  {
             if (response.status === 401) {
                 // auto logout if 401 response returned from api
-                logout();
-                location.reload(true);
             }
             console.log("entro en error handle response")
             const error = (data && data.message) || response.statusText;

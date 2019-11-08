@@ -41,19 +41,20 @@ const Comments = (props) => {
     const [comments, setComments] = useState({...COMMENTS_DATA});
     const [isLoading, setIsLoading] = useState(false);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            setIsLoading(true);
-            const result = await commentService.getCommentByPost(props.auth.token, props.postId )
-                .then(post => {
-                    setComments({ ...comments, postData :   JSON.parse(post.body),});
-                    setIsLoading(false);
-                }).catch(error => {
-                        throw error
-                    }
+    const fetchData = async () => {
+        setIsLoading(true);
+        const result = await commentService.getCommentByPost(props.auth.token, props.postId )
+            .then(post => {
+                setComments({ ...comments, postData :   JSON.parse(post.body),});
+                setIsLoading(false);
+            }).catch(error => {
+                    throw error
+                }
 
-                );
-        }
+            );
+    }
+
+    useEffect(() => {
         fetchData()
     }, [] );
 
@@ -69,23 +70,22 @@ const Comments = (props) => {
                 if(user != null){
                     setValues({ ...INITIAL_STATE });
                     console.log('Redireccionando a la home');
-                    props.history.push(ROUTES.HOME);
+                    fetchData()
                 }else{
                     const error = {message : 'Error intentando comentar, intente nuevamente'}
-                    setValues({ ...INITIAL_STATE, cardAnimation: "", error: error });
+                    setValues({ ...INITIAL_STATE, error: error });
                 }
 
             })
             .catch(error => {
                 setValues({ error });
             });
+
         event.preventDefault();
+
     };
 
     const onChange = event => {
-        console.log(event.target.name)
-        console.log(event.target.value)
-
         setValues({ ...form, [event.target.name]: event.target.value });
     };
 
@@ -100,7 +100,7 @@ const Comments = (props) => {
     return(
         <div className={classes.container}>
                {form.error &&
-                <GridItem xs={12} sm={12} md={12}>
+                <GridItem xs={12} sm={12} md={6}>
                     <SnackbarContent
                         message={
                             <span>
@@ -120,8 +120,8 @@ const Comments = (props) => {
                         ) : (
                             <div>
                                 {arr.reverse().map(item =>
-                                    <GridContainer >
-                                        <GridItem xs={12} sm={12} md={12}>
+                                    <GridContainer justify="center">
+                                        <GridItem xs={12} sm={12} md={6}>
                                             <Card>
                                                 <CardBody>
                                                     <p className={classes.textCenter}>
@@ -129,7 +129,7 @@ const Comments = (props) => {
                                                     </p>
                                                 </CardBody>
                                                 <CardFooter>
-                                                    <p>Posteado por: <Link href={item.userId}>{item.userName}</Link></p>
+                                                    <p><Link href={item.userId}>{item.userName}</Link></p>
                                                 </CardFooter>
                                             </Card>
                                         </GridItem>
@@ -139,7 +139,8 @@ const Comments = (props) => {
                         )}
                     </div>
                 </GridItem>
-                <GridItem xs={12} sm={12} md={12}>
+            <GridContainer justify="center">
+                <GridItem xs={12} sm={12} md={6}>
                     <Card className={classes[form.cardAnimation]}>
                         <form className={classes.form} onSubmit={onSubmit}>
                             <CardBody>
@@ -181,7 +182,7 @@ const Comments = (props) => {
                     </Card>
 
                 </GridItem>
-
+            </GridContainer>
         </div>
     )
 }

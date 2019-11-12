@@ -16,6 +16,7 @@ import {Email} from "@material-ui/icons";
 import Icon from "@material-ui/core/Icon";
 import CardFooter from "../../MaterialKitComponets/Card/CardFooter";
 import Button from "@material-ui/core/Button";
+import CKEditor from 'ckeditor4-react';
 const useStyles = makeStyles(styles);
 
 const INITIAL_STATE = {
@@ -68,6 +69,12 @@ const NewPost = (props) => {
         setValues({ ...form, [event.target.name]: event.target.value });
     };
 
+    const editorChange = event => {
+
+        setValues({ ...form, content: event.editor.getData()});
+        console.log(event.editor.getData());
+    };
+
     const { email, password, error } = form;
     const isInvalid = password === '' || email === '';
     const classes = useStyles();
@@ -111,28 +118,9 @@ const NewPost = (props) => {
                                         )
                                     }}
                                 />
-                                <CustomInput
-                                    labelText="Contenido"
-                                    id="content"
-                                    formControlProps={{
-                                        fullWidth: true
-                                    }}
-                                    inputProps={{
-                                        onChange: onChange,
-                                        type: "content",
-                                        multiline : true,
-                                        rows : "8",
-                                        name: "content",
-                                        value: form.password,
-                                        endAdornment: (
-                                            <InputAdornment position="end">
-                                                <Icon className={classes.inputIconsColor}>
-                                                    lock_outline
-                                                </Icon>
-                                            </InputAdornment>
-                                        ),
-                                        autoComplete: "off"
-                                    }}
+                                <CKEditor
+                                    data="<p>Contenido</p>"
+                                    onChange={editorChange}
                                 />
                             </CardBody>
                             <CardFooter className={classes.cardFooter}>

@@ -7,6 +7,7 @@ import Navigation from '../Navigation';
 import LandingPage from '../Landing';
 import SignUpPage from '../SignUp';
 import SignInPage from '../SignIn';
+import Profile from '../Profile';
 import Footer from "../../MaterialKitComponets/Footer/Footer.js";
 import HomePage from '../Home';
 import AdminPage from '../Admin';
@@ -30,6 +31,7 @@ const App = (props) => {
                     <Route path={ROUTES.ADMIN} component={AdminPage} />
                     <Route path={ROUTES.POSTVIEW} component={PostView} />
                     <Route path={ROUTES.NEWPOST} component={NewPost} />
+                    <Route path={ROUTES.USERVIEW} component={Profile} />
 
                     </div>
                 <Footer/>

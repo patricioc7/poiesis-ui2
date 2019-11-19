@@ -1,8 +1,8 @@
 const api = require('express').Router();
 const request = require('request');
 
-const apiBaseUrl = 'https://poiesis-api.herokuapp.com';
-//const apiBaseUrl = 'http://localhost:8080';
+//const apiBaseUrl = 'https://poiesis-api.herokuapp.com';
+const apiBaseUrl = 'http://localhost:8080';
 const clientSecret = 'wolololoaka';
 
 ///////USER METHODS
@@ -28,6 +28,32 @@ api.post('/users/authenticate/', (req, res) => {
             console.log('este es el bodi', body);
             res.status(200).json({jwt: body.token, userName: body.name, userId: body.userId});
 
+        },
+    );
+});
+
+
+//Get user
+api.post('/getUser/', (req, res) => {
+    console.log("///////Getting User" + req.body.userId + " FROM  API");
+    request.get(
+        apiBaseUrl + '/user/get/' + req.body.userId,
+        {
+            headers: {
+                'authorization': req.body.token,
+                'Content-Type': 'application/json',
+                'x-clientSecret': clientSecret,
+            },
+        },
+        (error, res2, body) => {
+
+            if (error) {
+                console.error(error);
+                return;
+            }
+            console.log(res2);
+            console.log(body);
+            res.status(200).json({body});
         },
     );
 });

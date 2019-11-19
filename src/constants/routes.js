@@ -6,4 +6,5 @@ export const ACCOUNT = '/account';
 export const ADMIN = '/admin';
 export const NEWPOST = '/newpost';
 export const POSTVIEW = '/postview/:postid';
+export const USERVIEW = '/user/:userid';
 export const PASSWORD_FORGET = '/pw-forget';
